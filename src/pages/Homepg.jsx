@@ -3,13 +3,44 @@ import Headercom from "../components/Headercom";
 import "./homepg.css";
 import Bodycom from "../components/Bodycom";
 import Filter from "../components/Filter";
-const homepg = () => {
+import Todos from "../components/Todos";
+const Homepg = () => {
   const data = {
     status: [
       { label: "completed", value: 3 },
       { label: "pending", value: 2 },
       { label: "archived", value: 1 },
       { label: "all", value: 6 },
+    ],
+    todo: [
+      {
+        title: "title1",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, facere architecto. Odit repellendus optio non iste nulla veritatis eius dolor?",
+        status: "completed",
+        color: "#00ac69",
+      },
+      {
+        title: "title2",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, facere architecto. Odit repellendus optio non iste nulla veritatis eius dolor?",
+        status: "pending",
+        color: "#3171e0ff",
+      },
+      {
+        title: "title3",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, facere architecto. Odit repellendus optio non iste nulla veritatis eius dolor?",
+        status: "archived",
+        color: "#8b33b1ff",
+      },
+      {
+        title: "title4",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, facere architecto. Odit repellendus optio non iste nulla veritatis eius dolor?",
+        status: "all",
+        color: "#bf297eff",
+      },
     ],
   };
   return (
@@ -18,9 +49,10 @@ const homepg = () => {
       <div className="bodycontainer">
         <Bodycom />
         <Filter apiData={data} />
+        <Todos apiData={data?.todo} />
       </div>
     </div>
   );
 };
 
-export default homepg;
+export default Homepg;
