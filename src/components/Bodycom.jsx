@@ -6,7 +6,7 @@ const bodycom = () => {
       <div className="c04">
         <input
           type="text"
-          placeholder="Search here.. "
+          placeholder="Search task here.. "
           className="c05"
           autoComplete="off"
         />

@@ -8,24 +8,25 @@
   margin: auto;
 }
 .c01 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 5px 15px;
   background-color: #f0f0f0;
 }
 .c03 {
   font-size: 30px;
-  margin-left: 40px;
+  text-align: center;
+  position: sticky;
+  top: 10px;
 }
 .c02 {
   font-size: 14px;
   padding: 8px 18px;
-  margin-right: 30px;
   border: none;
   border-radius: 25px;
   background-color: #c5cfdb;
   transition: all 0.1s ease-in-out;
+  position: sticky;
+  margin-left: 87%;
+  bottom: 25px;
 }
 .c02:hover {
   transform: scale(1.05);
@@ -38,7 +39,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px;
+  margin: 20px 10px;
+  border-radius: 10px;
 }
 .c05 {
   font-size: 16px;
@@ -62,6 +64,7 @@
 .c07 {
   display: flex;
   justify-content: start;
+  margin-bottom: 15px;
   /* align-items: center; */
   border: 1px solid #7f8385;
   border-radius: 10px;
@@ -76,7 +79,7 @@
   width: 100%;
   border-radius: 10px;
   background-color: whitesmoke;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.05s ease-in-out;
 }
 @media (max-width: 320px) {
   .c02 {
@@ -112,17 +115,27 @@
   }
 }
 .c08:hover {
-  box-shadow: 3px 3px 5px rgba(157, 168, 141, 0.694);
+  box-shadow: 5px 5px 10px rgb(79, 76, 79);
+  transform: scale(1.05);
 }
 .c10 {
-  border: 1px solid red;
-  margin: 20px 10px 0px 10px;
+  border: 1px solid rgb(216, 196, 196);
+  margin: 5px 10px 5px 10px;
   padding: 5px 10px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgb(32, 31, 32), 1px 1px 5px rgb(73, 185, 129);
+  max-width: 90%;
+  min-width: 90%;
+}
+.c12 {
+  max-width: 100%;
+  max-height: 120px;
+  overflow: auto;
 }
 .c13 {
-  height: 20px;
-  width: 25px;
-  background-color: #e8c7de;
+  height: 15px;
+  width: 15px;
+  background-color: #e0e0e0;
   border: 1px solid #bcaf9c;
   border-radius: 50%;
 }
@@ -142,7 +155,15 @@
   text-decoration: underline;
 }
 .icons {
-  margin-right: 20px;
+  gap: 20px;
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.c10:hover .icons {
+  opacity: 1;
+  pointer-events: auto;
 }
 .icon {
   margin-right: 5px;

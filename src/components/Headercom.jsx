@@ -5,7 +5,6 @@ const Headercom = () => {
     <div>
       <div className="c01">
         <h2 className="c03">ToDo X</h2>
-        <button className="c02">Create Todo</button>
       </div>
     </div>
   );

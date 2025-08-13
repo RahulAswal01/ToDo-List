@@ -16,14 +16,14 @@ const Homepg = () => {
       {
         title: "title1",
         description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, facere architecto. Odit repellendus optio non iste nulla veritatis eius dolor?",
+          "Lorem ipsum dolor, sit amet consectetur adiporem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur corporis autem laudantaliquid ipsa praesentiumdi Lorem ipsum dolor, sit amet ",
         status: "completed",
         color: "#00ac69",
       },
       {
         title: "title2",
         description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, facere architecto. Odit repellendus optio non iste nulla veritatis eius dolor?",
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. F",
         status: "pending",
         color: "#3171e0ff",
       },
@@ -41,6 +41,27 @@ const Homepg = () => {
         status: "all",
         color: "#bf297eff",
       },
+      {
+        title: "title5",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, facere architecto. Odit repellendus optio non iste nulla veritatis eius dolor?",
+        status: "archived",
+        color: "#8b33b1ff",
+      },
+      {
+        title: "title6",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, facere architecto. Odit repellendus optio non iste nulla veritatis eius dolor?",
+        status: "archived",
+        color: "#8b33b1ff",
+      },
+      {
+        title: "title7",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, facere architecto. Odit repellendus optio non iste nulla veritatis eius dolor?",
+        status: "archived",
+        color: "#8b33b1ff",
+      },
     ],
   };
   return (
@@ -51,6 +72,7 @@ const Homepg = () => {
         <Filter apiData={data} />
         <Todos apiData={data?.todo} />
       </div>
+      <button className="c02">Create Todo</button>
     </div>
   );
 };
