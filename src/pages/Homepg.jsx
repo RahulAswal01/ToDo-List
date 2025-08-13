@@ -8,7 +8,7 @@ const Homepg = () => {
   const data = {
     status: [
       { label: "completed", value: 3 },
-      { label: "pending", value: 2 },
+      { label: "in progress", value: 2 },
       { label: "archived", value: 1 },
       { label: "all", value: 6 },
     ],
