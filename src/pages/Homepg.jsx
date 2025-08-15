@@ -6,7 +6,7 @@ import Filter from "../components/Filter";
 import Todos from "../components/Todos";
 const Homepg = () => {
   const data = {
-    status: [
+    stats: [
       { label: "completed", value: 3 },
       { label: "in progress", value: 2 },
       { label: "archived", value: 1 },
