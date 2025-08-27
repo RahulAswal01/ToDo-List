@@ -201,3 +201,29 @@
   background-color: red;
   color: white;
 }
+.over-layer {
+  background-color: rgba(0, 0, 0, 0.598);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+.add-task-cont {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 150;
+  width: min-content;
+  height: min-content;
+  transform: translate(-50%, -50%);
+}
+.contents {
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+}
+.activeclass {
+  background-color: red;
+}
