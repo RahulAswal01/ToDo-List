@@ -81,6 +81,7 @@ const Homepg = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        // console.log(data?.[0]?.todo);
         setApiData(data?.[0]?.stats);
         setTodoApiData(data?.[0]?.todo);
       })

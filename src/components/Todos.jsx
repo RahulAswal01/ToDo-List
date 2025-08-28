@@ -5,6 +5,7 @@ import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import searchInput from "./recoil/searchInput";
 import { useRecoilState } from "recoil";
 import todoatom from "./recoil/todoatom";
+import { useEffect } from "react";
 const Todos = () => {
   const captalise = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -32,7 +33,12 @@ const Todos = () => {
                 <div className="c13"></div>
                 <div className="c10">
                   <div className="c11">
-                    <p className="c15">
+                    {console.log(data)}
+                    <p
+                      className={` ${
+                        data.status === "completed" ? "title_line_through" : ""
+                      } c15`}
+                    >
                       &nbsp;&nbsp;{captalise(data?.title)}&nbsp;&nbsp;
                     </p>
                     <div className="icons">

@@ -1,8 +1,12 @@
 import React, { useRef } from "react";
 import addTaskAtom from "./recoil/addTaskAtom";
 import { useRecoilState } from "recoil";
+import todoatom from "./recoil/todoatom";
+import apiDataAtom from "./recoil/apiDataAtom";
 
 const AddTask = () => {
+  const [todoApiData, setTodoApiData] = useRecoilState(todoatom);
+  const [apiData, setApiData] = useRecoilState(apiDataAtom);
   const titleref = useRef(null);
   const descref = useRef(null);
   const addTaskHandler = (e) => {
@@ -21,6 +25,8 @@ const AddTask = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        setApiData(data?.stats);
+        setTodoApiData(data?.todo);
         setAddTaskOverlayer(false);
       })
       .catch((error) => console.log(error));
