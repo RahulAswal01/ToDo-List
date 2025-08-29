@@ -6,12 +6,16 @@ import searchInput from "./recoil/searchInput";
 import { useRecoilState } from "recoil";
 import todoatom from "./recoil/todoatom";
 import { useEffect } from "react";
+import apiDataAtom from "./recoil/apiDataAtom";
+import btn_manager from "./recoil/btn_manager";
 const Todos = () => {
   const captalise = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
   const [searchText, setSearchText] = useRecoilState(searchInput);
   const [todoApiData, setTodoApiData] = useRecoilState(todoatom);
+  const [btnTracker, setBtnTracker] = useRecoilState(btn_manager);
+  const [apiData, setApiData] = useRecoilState(apiDataAtom);
   return (
     <div>
       <div>
@@ -30,10 +34,16 @@ const Todos = () => {
           ?.map((data, index) => {
             return (
               <div key={index} className="c14">
-                <div className="c13"></div>
+                <div
+                  className={`${
+                    data?.status === "completed" ? "completed_btn" : "c13"
+                  }`}
+                  onClick={() => {
+                    console.log(data);
+                  }}
+                ></div>
                 <div className="c10">
                   <div className="c11">
-                    {console.log(data)}
                     <p
                       className={` ${
                         data.status === "completed" ? "title_line_through" : ""
@@ -43,8 +53,196 @@ const Todos = () => {
                     </p>
                     <div className="icons">
                       <EditOutlinedIcon className="icon" id="edit" />
-                      <ArchiveOutlinedIcon className="icon" id="archived" />
-                      <DeleteOutlinedIcon className="icon" id="delete" />
+                      <ArchiveOutlinedIcon
+                        className="icon"
+                        id="archived"
+                        onClick={() => {
+                          if (
+                            data?.status === "archived" &&
+                            btnTracker === "archived"
+                          ) {
+                            const archivedcred = {
+                              id: data?.id,
+                            };
+                            fetch(
+                              "http://127.0.0.1:8000/archived_task_archived",
+                              {
+                                method: "POST",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(archivedcred),
+                              }
+                            )
+                              .then((res) => res.json())
+                              .then((data) => {
+                                setApiData(data?.[0]?.stats);
+                                setTodoApiData(data?.[0]?.todo);
+                              })
+                              .catch((error) => alert(error));
+                          } else if (
+                            data?.status === "completed" &&
+                            btnTracker === "completed"
+                          ) {
+                            const archivedcred = {
+                              id: data?.id,
+                            };
+                            fetch(
+                              "http://127.0.0.1:8000/archived_task_completed",
+                              {
+                                method: "POST",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(archivedcred),
+                              }
+                            )
+                              .then((res) => res.json())
+                              .then((data) => {
+                                setApiData(data?.[0]?.stats);
+                                setTodoApiData(data?.[0]?.todo);
+                              })
+                              .catch((error) => alert(error));
+                          } else if (
+                            data?.status === "in progress" &&
+                            btnTracker === "in progress"
+                          ) {
+                            const archivedcred = {
+                              id: data?.id,
+                            };
+                            fetch(
+                              "http://127.0.0.1:8000/archived_task_in_progress",
+                              {
+                                method: "POST",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(archivedcred),
+                              }
+                            )
+                              .then((res) => res.json())
+                              .then((data) => {
+                                setApiData(data?.[0]?.stats);
+                                setTodoApiData(data?.[0]?.todo);
+                              })
+                              .catch((error) => alert(error));
+                          } else {
+                            // console.log("btn was pressed");
+                            const archivedcred = {
+                              id: data?.id,
+                            };
+                            fetch("http://127.0.0.1:8000/archived_task_all", {
+                              method: "POST",
+                              headers: {
+                                "Content-Type": "application/json",
+                              },
+                              body: JSON.stringify(archivedcred),
+                            })
+                              .then((res) => res.json())
+                              .then((data) => {
+                                setApiData(data?.[0]?.stats);
+                                setTodoApiData(data?.[0]?.todo);
+                              })
+                              .catch((error) => alert(error));
+                          }
+                        }}
+                      />
+                      <DeleteOutlinedIcon
+                        className="icon"
+                        id="delete"
+                        onClick={() => {
+                          if (
+                            data?.status === "archived" &&
+                            btnTracker === "archived"
+                          ) {
+                            const deletecred = {
+                              id: data?.id,
+                            };
+                            fetch(
+                              "http://127.0.0.1:8000/delete_task_archived",
+                              {
+                                method: "DELETE",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(deletecred),
+                              }
+                            )
+                              .then((apires) => apires.json())
+                              .then((apidata) => {
+                                // console.log(apidata);
+                                setApiData(apidata?.[0]?.stats);
+                                setTodoApiData(apidata?.[0]?.todo);
+                              })
+                              .catch((error) => alert(error));
+                          } else if (
+                            data?.status === "completed" &&
+                            btnTracker === "completed"
+                          ) {
+                            const deletecred = {
+                              id: data?.id,
+                            };
+                            fetch(
+                              "http://127.0.0.1:8000/delete_task_completed",
+                              {
+                                method: "DELETE",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(deletecred),
+                              }
+                            )
+                              .then((apires) => apires.json())
+                              .then((apidata) => {
+                                // console.log(apidata);
+                                setApiData(apidata?.[0]?.stats);
+                                setTodoApiData(apidata?.[0]?.todo);
+                              })
+                              .catch((error) => alert(error));
+                          } else if (
+                            data?.status === "in progress" &&
+                            btnTracker === "in progress"
+                          ) {
+                            const deletecred = {
+                              id: data?.id,
+                            };
+                            fetch(
+                              "http://127.0.0.1:8000/delete_task_in_progress",
+                              {
+                                method: "DELETE",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(deletecred),
+                              }
+                            )
+                              .then((apires) => apires.json())
+                              .then((apidata) => {
+                                // console.log(apidata);
+                                setApiData(apidata?.[0]?.stats);
+                                setTodoApiData(apidata?.[0]?.todo);
+                              });
+                          } else {
+                            const deletecred = {
+                              id: data?.id,
+                            };
+                            fetch("http://127.0.0.1:8000/delete_task_all", {
+                              method: "DELETE",
+                              headers: {
+                                "Content-Type": "application/json",
+                              },
+                              body: JSON.stringify(deletecred),
+                            })
+                              .then((apires) => apires.json())
+                              .then((apidata) => {
+                                // console.log(apidata);
+                                setApiData(apidata?.[0]?.stats);
+                                setTodoApiData(apidata?.[0]?.todo);
+                              })
+                              .catch((error) => alert(error));
+                          }
+                        }}
+                      />
                     </div>
                   </div>
                   <p className="c12">{data?.desc}</p>

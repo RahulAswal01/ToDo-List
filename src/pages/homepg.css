@@ -142,8 +142,15 @@
 .c13 {
   height: 15px;
   width: 15px;
-  background-color: #e0e0e0;
-  border: 1px solid #bcaf9c;
+  background-color: white;
+  border: 2px solid red;
+  border-radius: 50%;
+}
+.completed_btn {
+  height: 15px;
+  width: 15px;
+  background-color: white;
+  border: 2px solid green;
   border-radius: 50%;
 }
 .c14 {

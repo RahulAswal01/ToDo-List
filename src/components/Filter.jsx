@@ -4,17 +4,17 @@ import todoatom from "./recoil/todoatom";
 import apiDataAtom from "./recoil/apiDataAtom";
 import { useRecoilState } from "recoil";
 import { filterMap } from "./helper/filtermap";
+import btn_manager from "./recoil/btn_manager";
 
 const Filter = () => {
   const [apiData, setApiData] = useRecoilState(apiDataAtom);
+  const [btnTracker, setBtnTracker] = useRecoilState(btn_manager);
   const [activeFilter, setActiveFilter] = useState("all");
   const [todoApiData, setTodoApiData] = useRecoilState(todoatom);
   const captalise = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-  useEffect(() => {
-    console.log(activeFilter);
-  }, [activeFilter]);
+  useEffect(() => {}, [activeFilter]);
   return (
     <div className="c07">
       {apiData?.map((data, index) => {
@@ -33,15 +33,20 @@ const Filter = () => {
                   },
                 })
                   .then((res) => res.json())
-                  .then((data) => {
-                    console.log(data);
+                  .then((apidata) => {
                     if (filterMap[index]?.endpoints === "inital_call") {
-                      setTodoApiData(data[0]?.todo);
+                      // console.log(apidata);
+                      setApiData(apidata[0]?.stats);
+                      setTodoApiData(apidata[0]?.todo);
                     } else {
-                      setTodoApiData(data?.data);
+                      // console.log(apidata);
+                      setApiData(apidata[0]?.stats);
+                      setTodoApiData(apidata[0]?.todo);
                     }
                   })
                   .catch((error) => alert(error));
+                // console.log(data?.label);
+                setBtnTracker(data?.label);
               }}
             >
               <h3>{captalise(data?.label)}</h3>

@@ -38,11 +38,23 @@ const AddTask = () => {
         <h1>Add New Task</h1>
         <form action="#" onSubmit={addTaskHandler}>
           <label htmlFor="title">Title</label>
-          <input type="text" name="title" ref={titleref} required />
+          <input
+            type="text"
+            name="title"
+            ref={titleref}
+            required
+            autoComplete="off"
+          />
           <br />
           <br />
           <label htmlFor="desc">description</label>
-          <textarea name="desc" id="" ref={descref} required></textarea>
+          <textarea
+            name="desc"
+            id=""
+            ref={descref}
+            required
+            autoComplete="off"
+          ></textarea>
           <br />
           <br />
           <button>add task</button>
