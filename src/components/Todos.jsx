@@ -39,7 +39,117 @@ const Todos = () => {
                     data?.status === "completed" ? "completed_btn" : "c13"
                   }`}
                   onClick={() => {
-                    console.log(data);
+                    if (
+                      data?.status === "in progress" ||
+                      data?.status === "archived"
+                    ) {
+                      // console.log("in side in progress");
+                      if (
+                        data?.status === "in progress" &&
+                        btnTracker === "all"
+                      ) {
+                        const completedcred = {
+                          id: data?.id,
+                        };
+                        fetch("http://127.0.0.1:8000/completed_task", {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify(completedcred),
+                        })
+                          .then((apires) => apires.json())
+                          .then((apidata) => {
+                            setApiData(apidata?.[0]?.stats);
+                            setTodoApiData(apidata?.[0]?.todo);
+                          })
+                          .catch((error) => alert(error));
+                      } else if (
+                        data?.status === "in progress" &&
+                        btnTracker === "in progress"
+                      ) {
+                        const completedcred = {
+                          id: data?.id,
+                        };
+                        fetch(
+                          "http://127.0.0.1:8000/completed_task_in_progress",
+                          {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(completedcred),
+                          }
+                        )
+                          .then((apires) => apires.json())
+                          .then((apidata) => {
+                            setApiData(apidata?.[0]?.stats);
+                            setTodoApiData(apidata?.[0]?.todo);
+                          })
+                          .catch((error) => alert(error));
+                      } else {
+                        const completedcred = {
+                          id: data?.id,
+                        };
+                        fetch("http://127.0.0.1:8000/completed_task_archived", {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify(completedcred),
+                        })
+                          .then((apires) => apires.json())
+                          .then((apidata) => {
+                            setApiData(apidata?.[0]?.stats);
+                            setTodoApiData(apidata?.[0]?.todo);
+                          })
+                          .catch((error) => alert(error));
+                      }
+                    } else if (data?.status == "completed")
+                      if (
+                        data?.status === "completed" &&
+                        btnTracker === "all"
+                      ) {
+                        const completedcred = {
+                          id: data?.id,
+                        };
+                        fetch("http://127.0.0.1:8000/in_progress_task", {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify(completedcred),
+                        })
+                          .then((apires) => apires.json())
+                          .then((apidata) => {
+                            setApiData(apidata?.[0]?.stats);
+                            setTodoApiData(apidata?.[0]?.todo);
+                          })
+                          .catch((error) => alert(error));
+                      } else if (
+                        data?.status === "completed" &&
+                        btnTracker === "completed"
+                      ) {
+                        const completedcred = {
+                          id: data?.id,
+                        };
+                        fetch(
+                          "http://127.0.0.1:8000/in_progress_task_completed",
+                          {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(completedcred),
+                          }
+                        )
+                          .then((apires) => apires.json())
+                          .then((apidata) => {
+                            setApiData(apidata?.[0]?.stats);
+                            setTodoApiData(apidata?.[0]?.todo);
+                          })
+                          .catch((error) => alert(error));
+                      }
                   }}
                 ></div>
                 <div className="c10">

@@ -144,6 +144,7 @@
   width: 15px;
   background-color: white;
   border: 2px solid red;
+  cursor: pointer;
   border-radius: 50%;
 }
 .completed_btn {
@@ -151,6 +152,7 @@
   width: 15px;
   background-color: white;
   border: 2px solid green;
+  cursor: pointer;
   border-radius: 50%;
 }
 .c14 {
