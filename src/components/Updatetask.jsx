@@ -38,6 +38,65 @@ const Updatetask = () => {
           setTodoApiData(data?.[0]?.todo);
         })
         .catch((error) => alert(error));
+    } else if (btnTracker == "completed") {
+      const updatecred = {
+        id: IdTracker,
+        title: updatetitleref.current.value,
+        desc: updatedescref.current.value,
+      };
+      fetch("http://127.0.0.1:8000/update_task_completed", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatecred),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setApiData(data?.[0]?.stats);
+          setTodoApiData(data?.[0]?.todo);
+        })
+        .catch((error) => alert(error));
+    } else if (btnTracker == "in progress") {
+      const updatecred = {
+        id: IdTracker,
+        title: updatetitleref.current.value,
+        desc: updatedescref.current.value,
+      };
+      fetch("http://127.0.0.1:8000/update_task_in_progress", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatecred),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setApiData(data?.[0]?.stats);
+          setTodoApiData(data?.[0]?.todo);
+        })
+        .catch((error) => alert(error));
+    } else if (btnTracker == "archived") {
+      const updatecred = {
+        id: IdTracker,
+        title: updatetitleref.current.value,
+        desc: updatedescref.current.value,
+      };
+      fetch("http://127.0.0.1:8000/update_task_archived", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatecred),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setApiData(data?.[0]?.stats);
+          setTodoApiData(data?.[0]?.todo);
+        })
+        .catch((error) => alert(error));
+    } else {
+      console.log("not found any value in btn tracker");
     }
     setUpdateTask(null); // Move this here after update logic
   };
