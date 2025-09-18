@@ -1,23 +1,122 @@
-import React from "react";
+import React, { useRef } from "react";
+import updateTaskAtom from "./recoil/updateTaskAtom";
+import { useRecoilState } from "recoil";
+import btn_manager from "./recoil/btn_manager";
+import todoatom from "./recoil/todoatom";
+import apiDataAtom from "./recoil/apiDataAtom";
+import updateIdTracker from "./recoil/updateIdTracker";
 
 const Updatetask = () => {
-  const updateTaskHandler = () => {
-    console.log("update");
+  const [updateTask, setUpdateTask] = useRecoilState(updateTaskAtom);
+  const updatetitleref = useRef(null);
+  const updatedescref = useRef(null);
+  const [btnTracker, setBtnTracker] = useRecoilState(btn_manager);
+  const [todoApiData, setTodoApiData] = useRecoilState(todoatom);
+  const [apiData, setApiData] = useRecoilState(apiDataAtom);
+  const [IdTracker, setIdTracker] = useRecoilState(updateIdTracker);
+  // const [UpdateTaskOverLayer, setUpdateTaskOverLayer] =
+  //   useRecoilState(updateTaskAtom);
+
+  const updateTaskHandler = (e) => {
+    e.preventDefault();
+    if (btnTracker == "all") {
+      const updatecred = {
+        id: IdTracker,
+        title: updatetitleref.current.value,
+        desc: updatedescref.current.value,
+      };
+      fetch("http://127.0.0.1:8000/update_task_all", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatecred),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setApiData(data?.[0]?.stats);
+          setTodoApiData(data?.[0]?.todo);
+        })
+        .catch((error) => alert(error));
+    }
+    setUpdateTask(null); // Move this here after update logic
   };
+
   return (
-    <div>
+    <div className="outer-container">
       <div className="innerContainer">
-        <h1>Update Task</h1>
+        <h1 className="heading">Update Task</h1>
         <form action="#" onSubmit={updateTaskHandler}>
-          <label htmlFor="tile">Title : </label>
-          <input type="text" name="title" autoComplete="" />
+          <label htmlFor="tile" className="titdesc">
+            Title :{" "}
+          </label>
+          <input
+            type="text"
+            className="title-text"
+            name="title"
+            ref={updatetitleref}
+            required
+            autoComplete="off"
+          />
+          <input type="hidden" name="id" value={updateTask?.id} />
           <br />
           <br />
-          <label htmlFor="desc">description</label>
-          <textarea name="desc" id="" autoComplete="off"></textarea>
+          <label htmlFor="desc" className="titdesc">
+            description
+          </label>
+          <br />
+          <textarea
+            name="desc"
+            className="desc-text"
+            cols={60}
+            rows={5}
+            id=""
+            required
+            autoComplete="off"
+            ref={updatedescref}
+          ></textarea>
           <br />
           <br />
-          <button>Update Todo</button>
+          <fieldset className="radio-cont">
+            <legend>Task status</legend>
+            <div className="radio-btn">
+              <div>
+                <input
+                  className="radio-input"
+                  type="radio"
+                  name="status"
+                  id=""
+                  required
+                />
+                <label htmlFor="completed">completed</label>
+              </div>
+
+              <div>
+                <input
+                  className="radio-input"
+                  type="radio"
+                  name="status"
+                  id=""
+                />
+                <label htmlFor="in progress">in progress</label>
+              </div>
+
+              <div>
+                <input
+                  className="radio-input"
+                  type="radio"
+                  name="status"
+                  id=""
+                />
+                <label htmlFor="archived">archived</label>
+              </div>
+            </div>
+          </fieldset>
+          <br />
+          <br />
+          <button type="submit" className="update-form-submit">
+            Update Todo
+          </button>
         </form>
       </div>
     </div>

@@ -10,9 +10,14 @@ import { useRecoilState } from "recoil";
 import apiDataAtom from "../components/recoil/apiDataAtom";
 import todoatom from "../components/recoil/todoatom";
 import { useEffect } from "react";
+import Updatetask from "../components/Updatetask";
+import updateTaskAtom from "../components/recoil/updateTaskAtom";
 const Homepg = () => {
   const [apiData, setApiData] = useRecoilState(apiDataAtom);
   const [todoApiData, setTodoApiData] = useRecoilState(todoatom);
+  const [addTaskOverlayer, setAddTaskOverlayer] = useRecoilState(addTaskAtom);
+  const [updateTaskOverLayer, setUpdateTaskOverLayer] =
+    useRecoilState(updateTaskAtom);
   useEffect(() => {
     fetch("http://127.0.0.1:8000/inital_call", {
       method: "GET",
@@ -28,9 +33,22 @@ const Homepg = () => {
       })
       .catch((error) => alert(error));
   }, []);
-  const [addTaskOverlayer, setAddTaskOverlayer] = useRecoilState(addTaskAtom);
   return (
     <div className="relative">
+      {/* {update task} */}
+      {updateTaskOverLayer && (
+        <div>
+          {console.log("yes i am working")}
+          <div
+            className="over-layer"
+            onClick={() => {
+              setUpdateTaskOverLayer(null);
+            }}
+          ></div>
+          <Updatetask />
+        </div>
+      )}
+      {/* add task */}
       {addTaskOverlayer && (
         <div>
           <div

@@ -91,11 +91,14 @@ const AddTask = () => {
   return (
     <div className="add-task-cont">
       <div className="contents">
-        <h1>Add New Task</h1>
+        <h1 className="heading">Add New Task</h1>
         <form action="#" onSubmit={addTaskHandler}>
-          <label htmlFor="title">Title</label>
+          <label htmlFor="title" className="titdesc">
+            Title :{" "}
+          </label>
           <input
             type="text"
+            className="title-text"
             name="title"
             ref={titleref}
             required
@@ -103,9 +106,15 @@ const AddTask = () => {
           />
           <br />
           <br />
-          <label htmlFor="desc">description</label>
+          <label htmlFor="desc" className="titdesc">
+            description :{" "}
+          </label>
+          <br />
           <textarea
             name="desc"
+            className="desc-text"
+            cols={60}
+            rows={5}
             id=""
             ref={descref}
             required
@@ -113,7 +122,45 @@ const AddTask = () => {
           ></textarea>
           <br />
           <br />
-          <button type="submit">add task</button>
+          <fieldset className="radio-cont">
+            <legend>Task status</legend>
+            <div className="radio-btn">
+              <div>
+                <input
+                  className="radio-input"
+                  type="radio"
+                  name="status"
+                  id=""
+                  required
+                />
+                <label htmlFor="completed">completed</label>
+              </div>
+
+              <div>
+                <input
+                  className="radio-input"
+                  type="radio"
+                  name="status"
+                  id=""
+                />
+                <label htmlFor="in progress">in progress</label>
+              </div>
+
+              <div>
+                <input
+                  className="radio-input"
+                  type="radio"
+                  name="status"
+                  id=""
+                />
+                <label htmlFor="archived">archived</label>
+              </div>
+            </div>
+          </fieldset>
+          <br />
+          <button type="submit" className="form-submit">
+            Add Task
+          </button>
         </form>
       </div>
     </div>

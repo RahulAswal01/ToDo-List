@@ -9,14 +9,24 @@ import todoatom from "./recoil/todoatom";
 import { useEffect } from "react";
 import apiDataAtom from "./recoil/apiDataAtom";
 import btn_manager from "./recoil/btn_manager";
+import addTaskAtom from "./recoil/addTaskAtom";
+import updateTaskAtom from "./recoil/updateTaskAtom";
+import updateIdTracker from "./recoil/updateIdTracker";
 const Todos = () => {
   const captalise = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
   const [searchText, setSearchText] = useRecoilState(searchInput);
+  const [addTaskOverlayer, setAddTaskOverlayer] = useRecoilState(addTaskAtom);
   const [todoApiData, setTodoApiData] = useRecoilState(todoatom);
   const [btnTracker, setBtnTracker] = useRecoilState(btn_manager);
   const [apiData, setApiData] = useRecoilState(apiDataAtom);
+  const [updateTaskOverLayer, setUpdateTaskOverLayer] =
+    useRecoilState(updateTaskAtom);
+  const [IdTracker, setIdTracker] = useRecoilState(updateIdTracker);
+  useEffect(() => {
+    console.log("yes bro");
+  }, [updateTaskOverLayer]);
   return (
     <div>
       <div>
@@ -163,7 +173,21 @@ const Todos = () => {
                       &nbsp;&nbsp;{captalise(data?.title)}&nbsp;&nbsp;
                     </p>
                     <div className="icons">
-                      <EditOutlinedIcon className="icon" id="edit" />
+                      <EditOutlinedIcon
+                        className="icon"
+                        id="edit"
+                        onClick={() => {
+                          setIdTracker(data?.id);
+                          if (updateTaskOverLayer) {
+                            setUpdateTaskOverLayer(null);
+                          } else {
+                            setUpdateTaskOverLayer(true);
+                          }
+                          {
+                            console.log("i am working");
+                          }
+                        }}
+                      />
                       {btnTracker === "archived" ? (
                         <UnarchiveOutlinedIcon
                           className="icon"
