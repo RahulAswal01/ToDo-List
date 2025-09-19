@@ -294,6 +294,16 @@
   padding: 5px;
   transition: all ease-in-out 0.2ms;
 }
+.invit_temp {
+  width: 90%;
+  height: 60vh;
+  /* border: 1px solid red; */
+}
+.image {
+  height: 100%;
+  width: 80%;
+  padding-left: 10%;
+}
 .form-submit {
   display: flex;
   margin-left: 75%;
